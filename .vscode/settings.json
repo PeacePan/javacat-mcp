@@ -1,0 +1,28 @@
+{
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        // 可自行選擇是否開啟
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "importSorter.generalConfiguration.sortOnBeforeSave": true,
+    "importSorter.sortConfiguration.customOrderingRules.defaultNumberOfEmptyLinesAfterGroup": 0,
+    "importSorter.sortConfiguration.importMembers.order": "lowercaseLast",
+    "importSorter.sortConfiguration.importPaths.order": "lowercaseLast",
+    "importSorter.sortConfiguration.removeUnusedDefaultImports": false,
+    "importSorter.sortConfiguration.removeUnusedImports": false,
+    "importSorter.importStringConfiguration.tabSize": 4,
+    "importSorter.importStringConfiguration.tabType": "tab",
+    "importSorter.importStringConfiguration.numberOfEmptyLinesAfterAllImports": 1,
+    "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+    "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 120,
+    "importSorter.importStringConfiguration.trailingComma": "multiLine",
+    "typescript.inlayHints.parameterNames.enabled": "literals"
+}
