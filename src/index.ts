@@ -1,14 +1,14 @@
 import { FastMCP } from 'fastmcp';
 import { z } from 'zod';
-import { gqlFindRecord, setupAdminJWT } from './graphql';
-import { NormFieldValueType } from './types';
+import { NormFieldValueType } from '@norwegianForestLibs/enum';
+import { JavaCatGraphQLClient } from '@norwegianForestLibs/graphql/client';
+
+const graphqlClient = new JavaCatGraphQLClient({
+	env: 'staging',
+	authEnvPath: './auth.json',
+});
 
 (async function main() {
-	// if (!process.env.ACCESS_TOKEN) {
-	//     console.error("Error: ACCESS_TOKEN not set");
-	//     process.exit(1);
-	// }
-	// const accessToken = process.env.ACCESS_TOKEN;
 	const mcpServer = new FastMCP({
 		name: 'javacat-mcp-server',
 		version: '1.0.0',
@@ -24,7 +24,7 @@ import { NormFieldValueType } from './types';
 		}),
 		execute: async (args: { startAt: string; endAt: string }) => {
 			const { startAt, endAt } = args;
-			const records = await gqlFindRecord({
+			const records = await graphqlClient.query.find({
 				table: '__joblog__',
 				filters: [
 					{
@@ -56,8 +56,12 @@ import { NormFieldValueType } from './types';
 	});
 
 	try {
-		await mcpServer.start({ transportType: 'stdio' });
-		await setupAdminJWT();
+		// await mcpServer.start({ transportType: 'stdio' });
+		await graphqlClient.auth.signin({
+			name: 'Administrator',
+			email: 'Administrator',
+			otp: 'Administrator',
+		});
 		console.log('MCP 伺服器已啟動並運行中');
 	} catch (error) {
 		console.error('啟動 MCP 伺服器失敗:', error);

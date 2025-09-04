@@ -1,13 +1,20 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "node",
+		"module": "CommonJS",
+		"moduleResolution": "node",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+			"@norwegianForestTypes": ["./NorwegianForest/libs/@types/index.d.ts"],
+			"@norwegianForestTypes/*": ["./NorwegianForest/libs/@types/*"],
+			"@norwegianForestLibs/*": ["./NorwegianForest/libs/*"],
+			"@norwegianForestTables/*": ["./NorwegianForest/tables/*"],
+			"@xolo/*": ["./Xoloitzcuintli/*"],
+		},
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
