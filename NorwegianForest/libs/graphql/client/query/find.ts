@@ -1,9 +1,9 @@
 import { ApolloClient, NormalizedCacheObject, gql } from '@apollo/client';
 import { mapNormRecord2AsMyRecord2 } from '@norwegianForestLibs/util';
 import { NormFindArgs, NormRecord2, SafeRecord2 } from '@norwegianForestTypes';
+import { GraphQLFindOptions, GraphQLFindResult, GraphQLNormArgs } from '../../client/@types';
 import { cNormField } from '../libs/consts';
 import { convertNormArgsToGraphQLType, variableStringGenerator } from '../libs/utils';
-import { GraphQLFindOptions, GraphQLFindResult, GraphQLNormArgs } from '../type';
 
 /**
  * 分批取得資料表的所有資料再將資料組合起來回傳 \
@@ -53,7 +53,11 @@ export default async function <SpecificRecord extends SafeRecord2 = SafeRecord2>
 		const records: SpecificRecord[] = [];
 		do {
 			const realLimit = limit !== void 0 ? Math.min(limitPerQuery, limit - offset) : limitPerQuery;
-			const chunkRecords = await find<SpecificRecord>(client, { ...findArgs, offset, limit: realLimit }, { abortSignal });
+			const chunkRecords = await find<SpecificRecord>(
+				client,
+				{ ...findArgs, offset, limit: realLimit },
+				{ abortSignal }
+			);
 			if (!chunkRecords.length) break;
 			records.push(...chunkRecords);
 			offset += limitPerQuery;

@@ -1,4 +1,4 @@
-import { Null, SpecificFieldsOnly } from '../../../Xoloitzcuintli/interface';
+import { Null, SpecificFieldsOnly } from '@xolo/interface';
 import {
 	ApprovalStatus,
 	ArchivedStatus,
@@ -121,7 +121,7 @@ export type SafeRecord<BODY extends Row = Row, LINES extends Lines = Lines> = {
 	};
 };
 /** 後端內部 ID */
-export type SystemId = number | string;
+export type SystemId = number | ObjectId;
 
 //#region NormField & NormRecord & NormInsertArgs
 /** 正規化鍵值對 */
@@ -260,9 +260,9 @@ export type Authentication = {
 };
 //#endregion
 //#region NormPatchArgs
-export type NormPatchArgs = {
+export type NormPatchArgs<Table extends string = string> = {
 	/** 表格名稱 */
-	table: string;
+	table: Table;
 	/** 批次資料 */
 	data: Array<NormPatchRecord>;
 };
@@ -278,18 +278,18 @@ export type NormPatchRecord = RecordLocator & {
 /** 更新鍵值對 */
 export type UpdateNormField = NormField;
 /** 表身列定位 */
-export type LineRowLocator = {
+export type LineRowLocator<LineName extends string = string, KeyName extends string = string> = {
 	/** 表身名稱 */
-	lineName: string;
+	lineName: LineName;
 	/** 表身鍵欄位名稱，特殊值 `_id` */
-	lineKeyName: string;
+	lineKeyName: KeyName;
 	/** 表身鍵欄位值 */
 	lineKeyValue: string;
 };
 /** 紀錄定位 */
-export type RecordLocator = {
+export type RecordLocator<KeyName extends string = string> = {
 	/** 鍵欄位名稱，特殊值 `_id` */
-	keyName: string;
+	keyName: KeyName;
 	/** 鍵欄位值，如果 keyName 為 `_id` 必須為可正整數化文字 */
 	keyValue: string;
 };
@@ -594,6 +594,10 @@ export type SafeRecord2<BODY extends Row = Row, LINES extends Lines = Lines> = {
 		[lineName in keyof LINES]?: Array<Null<LINES[lineName] & BUILTIN_LINE_FILED2>> | null;
 	};
 };
+/** 提取 SafeRecord2 的表頭型別 */
+export type ExtractSafeRecordBody<T> = T extends SafeRecord2<infer BODY, unknown> ? BODY : never;
+/** 提取 SafeRecord2 的表身型別 */
+export type ExtractSafeRecordLines<T> = T extends SafeRecord2<unknown, infer LINES> ? LINES : never;
 /** 正規化 MyRecord */
 export interface NormRecord2 {
 	/** 系統編號 */
@@ -606,7 +610,7 @@ export interface NormRecord2 {
 //#endregion
 
 /** 將 Enum 轉換成字串也通用的型別，目的是在應用時輸入 string 也能觸發 snippet */
-export type EnumLiteral<E extends string | number | bigint | boolean | null | undefined> = E | `${E}`;
+export type EnumLiteral<E extends EnumType> = E | `${E}`;
 
 //#region 外部表身搜尋參數
 /** 提取特定 valueType 的 NormField */

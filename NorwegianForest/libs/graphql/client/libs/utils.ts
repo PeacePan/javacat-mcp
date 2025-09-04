@@ -1,5 +1,5 @@
 import { NormFindArgs } from '@norwegianForestTypes';
-import { GraphQLNormArgs } from '../type';
+import { GraphQLNormArgs } from '../../client/@types';
 import { cApprovalStatusMap, cArchivedStatusMap } from './consts';
 
 /**
@@ -25,7 +25,9 @@ export function variableStringGenerator(gqlVarString: string): string {
 	);
 }
 /** 依據資料型態或 Enum 前後端差異等做搜尋變數的轉換 */
-export function convertNormArgsToGraphQLType<Args extends Partial<NormFindArgs> = NormFindArgs>(variables: Args): GraphQLNormArgs<Args> {
+export function convertNormArgsToGraphQLType<Args extends Partial<NormFindArgs> = NormFindArgs>(
+	variables: Args
+): GraphQLNormArgs<Args> {
 	const { archived, approved, sorting, selects } = variables;
 	return {
 		...variables,
@@ -33,8 +35,8 @@ export function convertNormArgsToGraphQLType<Args extends Partial<NormFindArgs> 
 		// 由於有些表格已經移除 body._id，_id 的 sort 不能再使用 body._id
 		sorting: sorting?.field === 'body._id' ? { ...sorting, field: '_id' } : sorting,
 		// Enum 前後端使用不同
-		archived: archived ? (cArchivedStatusMap[archived] ?? 'NORMAL') : 'NORMAL',
-		approved: approved ? (cApprovalStatusMap[approved] ?? null) : null,
+		archived: archived ? cArchivedStatusMap[archived] ?? 'NORMAL' : 'NORMAL',
+		approved: approved ? cApprovalStatusMap[approved] ?? null : null,
 	};
 }
 /**

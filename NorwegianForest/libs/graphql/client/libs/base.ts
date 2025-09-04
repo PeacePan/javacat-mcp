@@ -18,7 +18,7 @@ import { setContext as setLinkContext } from '@apollo/client/link/context';
 import { onError as handleLinkError } from '@apollo/client/link/error';
 import { asyncMap } from '@apollo/client/utilities';
 import { GraphQLServerResult } from '@norwegianForestTypes/graphql';
-import { JavaCatGraphQLClientBaseOptions } from '../type';
+import { JavaCatGraphQLClientBaseOptions } from '../../client/@types';
 import { cGraphQLEndPoints } from './consts';
 import { isClientSide, isServerSide } from './utils';
 
@@ -111,14 +111,16 @@ export class JavaCatGraphQLClientBase {
 									const cookieToSet = headers.get('set-cookie') || headers.get('Set-Cookie');
 									if (cookieToSet) {
 										const parsedCookies = setCookieParser.parse(cookieToSet);
-										this._cookie = parsedCookies.map(({ name, value }) => `${name}=${value};`).join(' ');
+										this._cookie = parsedCookies
+											.map(({ name, value }) => `${name}=${value};`)
+											.join(' ');
 									}
 								}
 								return response;
 							})
 						);
 						return cookieSaverLink.concat(apolloLink);
-					}
+				  }
 				: void 0,
 		});
 	}
@@ -208,12 +210,16 @@ function createApolloClient(
 		queryDeduplication: false,
 	});
 	const origiqnalQuery = client.query;
-	client.query = (async <T, TVariables extends OperationVariables>(options: QueryOptions<TVariables, T>): Promise<ApolloQueryResult<T>> =>
+	client.query = (async <T, TVariables extends OperationVariables>(
+		options: QueryOptions<TVariables, T>
+	): Promise<ApolloQueryResult<T>> =>
 		origiqnalQuery(options).catch((error) => {
 			throw new Error(extractMessageFromServerError(error));
 		})).bind(client);
 	const origiqnalMutate = client.mutate;
-	client.mutate = (async <T, TVariables extends OperationVariables>(options: MutationOptions<T, TVariables>): Promise<FetchResult<T>> =>
+	client.mutate = (async <T, TVariables extends OperationVariables>(
+		options: MutationOptions<T, TVariables>
+	): Promise<FetchResult<T>> =>
 		origiqnalMutate(options).catch((error) => {
 			throw new Error(extractMessageFromServerError(error));
 		})).bind(client);
@@ -279,7 +285,10 @@ function extractMessageFromServerError(error: Error): string {
 			const serverErrors = serverResult?.errors || [];
 			for (const serverError of serverErrors) {
 				// 把 server 端的錯誤堆疊印出
-				console.error(serverError?.extensions?.code, serverError?.extensions?.exception?.stacktrace?.join('\n'));
+				console.error(
+					serverError?.extensions?.code,
+					serverError?.extensions?.exception?.stacktrace?.join('\n')
+				);
 				let message = serverError?.message;
 				/**
 				 * 如果後端直接帶出 error 的 message 而不是用 error 直接輸出字串的話

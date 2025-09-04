@@ -192,6 +192,24 @@ export type SigninByTokenArgs = {
 	accessKeyId: string;
 	secretAccessKey: string;
 };
+/** 裝置登入參數 */
+export type DeviceSigninArgs = {
+	/** 裝置名稱 */
+	deviceName: string;
+	/** 裝置編號 */
+	deviceId: string;
+	/** 使用者編號 */
+	userName: string;
+	/** 一次性密碼 */
+	otp: string;
+};
+/** 裝置令牌 */
+export type DeviceToken = {
+	/** 存取令牌 */
+	accessToken: string;
+	/** 刷新令牌 */
+	refreshToken: string;
+};
 //#endregion
 
 //#region ServerError
@@ -229,3 +247,17 @@ export type GraphQLServerResult = {
 	stack: string;
 };
 //#endregion
+
+export type DangerDropTableArgs = {
+	/** 表格名稱 */
+	table: string;
+	/** 是否強制刪除 */
+	forceDrop?: boolean;
+	/** 是否保留自動編碼 */
+	keepAutoKey?: boolean;
+	/** 是否刪除 .job 及 .log 表
+	 * @description 是 true 時可連帶刪除它的虛擬表【待辦工作】、【操作紀錄】
+	 * @default false
+	 */
+	purgeAll?: boolean;
+};

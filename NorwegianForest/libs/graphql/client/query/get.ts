@@ -1,9 +1,9 @@
 import { ApolloClient, NormalizedCacheObject, gql } from '@apollo/client';
 import { mapNormRecord2AsMyRecord2 } from '@norwegianForestLibs/util';
 import { NormGetArgs, NormRecord2, SafeRecord2 } from '@norwegianForestTypes';
+import { GraphQLNormArgs } from '../../client/@types';
 import { cNormField } from '../libs/consts';
 import { convertNormArgsToGraphQLType, variableStringGenerator } from '../libs/utils';
-import { GraphQLNormArgs } from '../type';
 
 const cVariablesTypeDefine = [
 	'$table: String!',

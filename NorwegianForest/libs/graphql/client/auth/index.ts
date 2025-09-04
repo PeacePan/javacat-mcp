@@ -1,6 +1,6 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { DeviceSigninArgs, OneTimePasswordArgs, SigninArgs, SigninByTokenArgs } from '@norwegianForestTypes/graphql';
-import { JavaCatGraphQLClientBaseOptions } from '../type';
+import { JavaCatGraphQLClientBaseOptions } from '../../client/@types';
 
 /**
  * JavaCat GraphQL Client 的驗證處理類別
@@ -187,7 +187,9 @@ export class JavaCatGraphQLClientAuthHandler {
 	 *
 	 * @throws {Error} 當 GraphQL 請求失敗時拋出錯誤
 	 */
-	public async tokenNewReq(args: Pick<DeviceSigninArgs, 'deviceName' | 'deviceId' | 'userName'>): ReturnType<typeof tokenNewReqHandler> {
+	public async tokenNewReq(
+		args: Pick<DeviceSigninArgs, 'deviceName' | 'deviceId' | 'userName'>
+	): ReturnType<typeof tokenNewReqHandler> {
 		const tokenNewReqHandler = await import('./tokenNewReq').then((m) => m.default);
 		return tokenNewReqHandler(this._client, args);
 	}
@@ -214,7 +216,9 @@ export class JavaCatGraphQLClientAuthHandler {
 	 * @returns {Promise<DeviceToken | null>} 刷新成功返回新的裝置令牌物件，失敗返回 null
 	 *
 	 * @throws {Error} 當 GraphQL 請求失敗時拋出錯誤
-	 */ public async tokenRenew(args: Pick<DeviceSigninArgs, 'deviceName' | 'deviceId'>): ReturnType<typeof tokenRenewHandler> {
+	 */ public async tokenRenew(
+		args: Pick<DeviceSigninArgs, 'deviceName' | 'deviceId'>
+	): ReturnType<typeof tokenRenewHandler> {
 		const tokenRenewHandler = await import('./tokenRenew').then((m) => m.default);
 		return tokenRenewHandler(this._client, args);
 	}
