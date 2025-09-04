@@ -1,7 +1,7 @@
 import { ApolloClient, NormalizedCacheObject, gql } from '@apollo/client';
 import { NormArchiveArgs } from '@norwegianForestTypes';
+import { GraphQLNormArgs } from '../../client/@types';
 import { convertNormArgsToGraphQLType, variableStringGenerator } from '../libs/utils';
-import { GraphQLNormArgs } from '../type';
 
 const cVariablesTypeDefine = ['$table: String!', '$data: [RecordLocator!]!'].join(' ');
 const cVariableString = `${variableStringGenerator(cVariablesTypeDefine)}`;

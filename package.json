@@ -13,31 +13,26 @@
     "inspect": "npx fastmcp inspect dist/index.js"
   },
   "dependencies": {
-    "@apollo/client": "^3.13.8",
-    "@valibot/to-json-schema": "^1.2.0",
-    "cross-fetch": "4.1.0",
-    "effect": "^3.15.4",
+    "@apollo/client": "3.13.8",
+    "@valibot/to-json-schema": "1.2.0",
+    "effect": "3.15.4",
     "fastmcp": "2.1.2",
     "graphql": "16.11.0",
-    "jwt-decode": "^4.0.0",
+    "jwt-decode": "4.0.0",
     "lodash": "4.17.21",
-    "react": "^19.1.0",
-    "set-cookie-parser": "^2.7.1",
-    "sury": "^10.0.0",
-    "ts-node": "10.9.2",
-    "typescript": "5.8.3",
-    "zod": "3.25.28"
+    "set-cookie-parser": "2.7.1"
   },
   "devDependencies": {
     "@types/lodash": "4.17.17",
     "@types/node": "22.15.21",
     "@types/set-cookie-parser": "2.4.10",
-    "babel-polyfill": "^6.26.0",
-    "glob": "^10.3.10",
-    "ts-loader": "^9.5.2",
-    "tsconfig-paths": "^4.2.0",
-    "tsconfig-paths-webpack-plugin": "^4.2.0",
-    "webpack-cli": "^6.0.1",
-    "webpack-node-externals": "^3.0.0"
+    "babel-polyfill": "6.26.0",
+    "ts-loader": "9.5.2",
+    "tsconfig-paths": "4.2.0",
+    "tsconfig-paths-webpack-plugin": "4.2.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.3",
+    "webpack-cli": "6.0.1",
+    "webpack-node-externals": "3.0.0"
   }
 }
