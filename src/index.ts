@@ -56,7 +56,7 @@ const graphqlClient = new JavaCatGraphQLClient({
 	});
 
 	try {
-		await mcpServer.start({ transportType: 'stdio' });
+		await mcpServer.start({ transportType: 'httpStream', httpStream: { port: 9453 } });
 		await graphqlClient.auth.signin({
 			name: 'Administrator',
 			email: 'Administrator',

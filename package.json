@@ -1,5 +1,5 @@
 {
-  "name": "javacat-mcp-server",
+  "name": "javacat-mcp",
   "version": "1.0.0",
   "description": "A simple MCP server using FastMCP",
   "main": "src/index.ts",
@@ -7,7 +7,6 @@
     "node": ">=18.15.0"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
     "start": "npx ts-node -r tsconfig-paths/register -T src/index.ts",
     "dev": "npx fastmcp dev src/index.ts",
     "inspect": "npx fastmcp inspect dist/index.js"
