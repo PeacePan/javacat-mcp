@@ -4,10 +4,13 @@
 		"module": "CommonJS",
 		"moduleResolution": "node",
     "outDir": "./dist",
-    "rootDir": "./",
-    "strict": true,
+    "rootDir": "./src",
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "declaration": false,
+    "sourceMap": false,
+    "baseUrl": "./",
     "paths": {
 			"@norwegianForestTypes": ["./NorwegianForest/libs/@types/index.d.ts"],
 			"@norwegianForestTypes/*": ["./NorwegianForest/libs/@types/*"],
@@ -17,5 +20,5 @@
 		},
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

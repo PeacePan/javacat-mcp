@@ -1,15 +1,21 @@
 {
   "name": "javacat-mcp",
   "version": "1.0.0",
-  "description": "A simple MCP server using FastMCP",
-  "main": "src/index.ts",
+  "description": "A simple javacat MCP server using FastMCP",
+  "main": "dist/index.js",
+  "bin": {
+    "javacat-mcp": "dist/index.js"
+  },
   "engines": {
-    "node": ">=18.15.0"
+    "node": ">=22"
   },
   "scripts": {
-    "start": "npx ts-node -r tsconfig-paths/register -T src/index.ts",
-    "dev": "npx fastmcp dev src/index.ts",
-    "inspect": "npx fastmcp inspect dist/index.js"
+    "build": "bash bin/build.sh",
+    "start": "node dist/index.js",
+    "dev": "npx ts-node -r tsconfig-paths/register -T src/index.ts",
+    "fastmcp-dev": "npx fastmcp dev src/index.ts",
+    "inspect": "npx fastmcp inspect dist/index.js",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@apollo/client": "3.13.8",
@@ -27,10 +33,11 @@
     "@types/set-cookie-parser": "2.4.10",
     "babel-polyfill": "6.26.0",
     "ts-loader": "9.5.2",
+    "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "tsconfig-paths-webpack-plugin": "4.2.0",
-    "ts-node": "10.9.2",
     "typescript": "5.8.3",
+    "webpack": "5.101.3",
     "webpack-cli": "6.0.1",
     "webpack-node-externals": "3.0.0"
   }
