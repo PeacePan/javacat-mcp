@@ -4,7 +4,7 @@
 		"module": "CommonJS",
 		"moduleResolution": "node",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -19,6 +19,6 @@
 			"@xolo/*": ["./Xoloitzcuintli/*"],
 		},
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "NorwegianForest/**/*", "Xoloitzcuintli/**/*"],
   "exclude": ["node_modules", "dist"]
 }
